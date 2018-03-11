@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="보여줘 기술자"
+        android:text="보여줘 기술사"
         android:textSize="24dp" />
 
 </RelativeLayout>

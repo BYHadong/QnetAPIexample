@@ -1,6 +1,7 @@
-package adong.org.qnetapiexample;
+package adong.org.qnetapiexample.Service;
 
-import adong.org.qnetapiexample.data.PEResult;
+import adong.org.qnetapiexample.GetURL;
+import adong.org.qnetapiexample.PEdata.PEResult;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

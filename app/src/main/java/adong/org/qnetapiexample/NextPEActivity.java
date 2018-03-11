@@ -1,6 +1,5 @@
 package adong.org.qnetapiexample;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,13 +9,11 @@ import adong.org.qnetapiexample.PEdata.Item;
 import adong.org.qnetapiexample.PEdata.PEResult;
 import adong.org.qnetapiexample.Service.APIService;
 import adong.org.qnetapiexample.Service.RetrofitAPI;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PEActivity extends AppCompatActivity {
+public class NextPEActivity extends AppCompatActivity {
 
     APIService apiService;
     Call<PEResult> call;
@@ -34,25 +31,18 @@ public class PEActivity extends AppCompatActivity {
     TextView pracpassdt;
     TextView pracregenddt;
 
-    @OnClick(R.id.nexttestbutton)
-    void nextbutton(){
-        Toast.makeText(this, "다음 시험 정보로 넘어갑니다.", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), NextPEActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pe);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_next_pe);
+
         init();
         apiService = RetrofitAPI.retrofit.create(APIService.class);
         call = apiService.getPEResult();
         call.enqueue(new Callback<PEResult>() {
             @Override
             public void onResponse(Call<PEResult> call, Response<PEResult> response) {
-                item = response.body().getResponse().getBody().getItems().getItem().get(0);
+                item = response.body().getResponse().getBody().getItems().getItem().get(1);
                 description.setText(item.getDescription());
                 docregstartdt.setText(chnum(item.getDocregstartdt()));
                 docregenddt.setText(chnum(item.getDocregenddt()));
@@ -75,18 +65,18 @@ public class PEActivity extends AppCompatActivity {
     }
 
     public void init(){
-        description = findViewById(R.id.description);
-        docregstartdt = findViewById(R.id.docregstartdt);
-        docregenddt = findViewById(R.id.docregenddt);
-        docexamdt = findViewById(R.id.docexamdt);
-        docpassdt = findViewById(R.id.docpassdt);
-        docsubmitstartdt = findViewById(R.id.docsubmitstartdt);
-        docsubmitendt = findViewById(R.id.docsubmitendt);
-        pracregstartdt = findViewById(R.id.pracregstartdt);
-        pracregenddt = findViewById(R.id.pracregenddt);
-        pracexamstartdt = findViewById(R.id.pracexamstartdt);
-        pracexamenddt = findViewById(R.id.pracexamenddt);
-        pracpassdt = findViewById(R.id.pracpassdt);
+        description = findViewById(R.id.description1);
+        docregstartdt = findViewById(R.id.docregstartdt1);
+        docregenddt = findViewById(R.id.docregenddt1);
+        docexamdt = findViewById(R.id.docexamdt1);
+        docpassdt = findViewById(R.id.docpassdt1);
+        docsubmitstartdt = findViewById(R.id.docsubmitstartdt1);
+        docsubmitendt = findViewById(R.id.docsubmitendt1);
+        pracregstartdt = findViewById(R.id.pracregstartdt1);
+        pracregenddt = findViewById(R.id.pracregenddt1);
+        pracexamstartdt = findViewById(R.id.pracexamstartdt1);
+        pracexamenddt = findViewById(R.id.pracexamenddt1);
+        pracpassdt = findViewById(R.id.pracpassdt1);
     }
 
     public String chnum(String chString){
@@ -97,4 +87,10 @@ public class PEActivity extends AppCompatActivity {
         return chString;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(this, "이전 시험 정보로 돌아갑니다.", Toast.LENGTH_SHORT).show();
+        finish();
+    }
 }

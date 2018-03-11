@@ -1,4 +1,4 @@
-package adong.org.qnetapiexample;
+package adong.org.qnetapiexample.Service;
 
 import adong.org.qnetapiexample.GetURL;
 import retrofit2.Retrofit;
